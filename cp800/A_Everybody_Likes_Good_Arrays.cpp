@@ -6,6 +6,7 @@ vector<ll> takeInput(ll n) {
     vector<ll> arr(n);
     for (ll i=0; i<n; i++) {
         cin >> arr[i];
+        arr[i] = arr[i]%2;
     }
     return arr;
 }
@@ -35,14 +36,22 @@ ll getSum(vector<ll> &arr) {
 
 void solve()
 {
-    ll n;
-    cin >> n;
+    ll n; cin >> n;
     vector<ll> a = takeInput(n);
 
-    vector<ll> b(n);
-    for (ll i=0; i<n; i++) b[i] = n+1 - a[i];
+    if (n==1)
+    {
+        cout << 0 << endl;
+        return;
+    }
+    
+    ll ops = 0;
+    for (ll i=0; i<n-1; i++)
+    {
+        if (a[i] == a[i+1]) ops++;
+    }
 
-    printArray(b);
+    cout << ops << endl;
 }
 
 int main()

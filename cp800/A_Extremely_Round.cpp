@@ -33,23 +33,35 @@ ll getSum(vector<ll> &arr) {
     return sum;
 }
 
+ll digits(ll n)
+{
+    ll d = 0;
+
+    while(n != 0)
+    {
+        d++;
+        n = n / 10;
+    }
+
+    return d;
+}
+
 void solve()
 {
     ll n; cin >> n;
-    vector<ll> a = takeInput(n);
 
-    ll xr = 0;
-    for (ll i=0; i<n; i++) xr = xr ^ a[i];
+    ll d = digits(n);
 
-    if (!(n&1))
+    ll ans = 9 * (d-1);
+
+    ll zeros = pow(10, d-1);
+    for (int i=1; i<=9; i++)
     {
-        if (xr == 0) cout << 1 << endl;
-        else cout << -1 << endl;
-        return;
-    } 
+        if (i * zeros <= n) ans++;
+        else break;
+    }
 
-    else if (xr >= 0 && xr < pow(2, 8)) cout << xr << endl;
-    else cout << -1 << endl;
+    cout << ans << endl;
 }
 
 int main()

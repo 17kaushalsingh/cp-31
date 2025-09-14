@@ -35,21 +35,16 @@ ll getSum(vector<ll> &arr) {
 
 void solve()
 {
-    ll n, k;
-    cin >> n >>k;
+    ll n, a, b;
+    cin >> n >> a >> b;
 
-    if (!(k&1))
+    if (n == a && n == b)
     {
-        if (!(n&1)) cout << "YES" << endl;
-        else cout << "NO" << endl;
+        cout << "YES" << endl;
+        return;
     }
 
-    else
-    {
-        if (!(n&1)) cout << "YES" << endl;
-        else if (k <= n) cout << "YES" << endl;
-        else cout << "NO" << endl;
-    }
+    cout << ((n-a-b >= 2) ? "YES\n" : "NO\n");
 }
 
 int main()

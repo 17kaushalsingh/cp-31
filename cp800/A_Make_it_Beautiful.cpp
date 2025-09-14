@@ -35,31 +35,48 @@ ll getSum(vector<ll> &arr) {
 
 void solve()
 {
-    ll n;
-    cin >> n;
+    ll n; cin >> n;
     vector<ll> a = takeInput(n);
 
-    sort(a.rbegin(), a.rend());
+    ll mini = getMin(a);
+    ll maxi = getMax(a);
 
-    for (ll i=1; i<n-1; i++)
+    if (mini == maxi)
     {
-        if (a[i] == a[i-1]) swap(a[i], a[i+1]);
+        cout << "NO" << endl;
+        return;
     }
 
-    ll prefix = 0;
+    ll maxiIdx = -1;
     for (ll i=0; i<n; i++)
     {
-        if (a[i] == prefix)
+        if (a[i] == maxi)
         {
-            cout << "NO" << endl;
-            return;
+            maxiIdx = i;
+            break;
         }
+    }
 
-        prefix += a[i];
+    ll miniIdx = -1;
+    for (ll i=0; i<n; i++)
+    {
+        if (a[i] == mini)
+        {
+            miniIdx = i;
+            break;
+        }
+    }
+
+    vector<ll> ans;
+    ans.push_back(maxi);
+    ans.push_back(mini);
+    for (ll i=0; i<n; i++)
+    {
+        if (i != miniIdx && i != maxiIdx) ans.push_back(a[i]);
     }
 
     cout << "YES" << endl;
-    printArray(a);
+    printArray(ans);
 }
 
 int main()
