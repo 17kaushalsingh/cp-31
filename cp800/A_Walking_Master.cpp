@@ -33,20 +33,31 @@ ll getSum(vector<ll> &arr) {
     return sum;
 }
 
-ll f(ll x, ll y, ll c, ll d)
-{
-    if (x == c && y == d) return 0; // found the target
-
-    if (c > x)
-}
-
 void solve()
 {
-    ll x, y, c, d;
-    cin >> x >> y >> c >> d;
+    ll sx, sy, dx, dy;
+    cin >> sx >> sy >> dx >> dy;
 
-    ll ans = f(x, y, c, d);
-    if (ans == INT_MAX) ans = -1;
+    if (dy < sy)
+    {
+        cout << -1 << endl;
+        return;
+    }
+
+    ll ans = abs(dy - sy);
+
+    // now both points are at the same horizonatal level, y level
+    sx = sx + abs(dy - sy);
+    sy = sy + abs(dy - sy);
+
+    if (dx > sx) 
+    {
+        cout << -1 << endl;
+        return;
+    }
+
+    ans += abs(sx - dx);
+
     cout << ans << endl;
 }
 
