@@ -1,33 +1,39 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <list>
-#include <deque>
-#include <array>
-#include <set>
-#include <map>
-#include <unordered_set>
-#include <unordered_map>
-#include <algorithm>
-#include <functional>
-#include <string>
-#include <memory>
-#include <cstdlib>
-#include <cmath>
-#include <ctime>
-#include <chrono>
-#include <complex>
-#include <stdexcept>
-#include <exception>
-#include <type_traits>
-#include <bitset>
-#include <tuple>
-#include <iterator>
-#include <cassert>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
+using ll = long long;
+
+vector<int> f(vector<int> &arr, int n)
+{
+    if (arr.size() == 0) return {};
+
+    vector<int> a;
+    a.push_back(arr[0]);
+
+    for (int i=1; i<n; i++)
+    {
+        if (arr[i] >= arr[i-1]) a.push_back(arr[i]);
+        else{
+            a.push_back(1);
+            a.push_back(arr[i]);
+        }
+    }
+
+    return a;
+}
+
+void solve()
+{
+    int n; cin >> n;
+    vector<int> b(n);
+    for (int i=0; i<n; i++) cin >> b[i];
+
+    vector<int> a = f(b, n);
+
+    cout << a.size() << endl;
+    for (int &x : a) cout << x << " ";
+    cout << endl;
+}
 
 int main()
 {
@@ -38,21 +44,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n; cin >> n;
-        vector<int> arr(n);
-        for (int i=0; i<n ; i++) cin >> arr[i];
-
-        vector<int> ans;
-        ans.push_back(arr[0]);
-        for (int i=1; i<n; i++)
-        {
-            ans.push_back(arr[i]);
-            ans.push_back(arr[i]);
-        }
-
-        cout << 2*n-1 << endl;
-        for (int x : ans) cout << x << " ";
-        cout << endl;
+        solve();
     }
 
     return 0;
