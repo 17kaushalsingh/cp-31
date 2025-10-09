@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
-#define ll long long
-#define all(x) (x).begin(), (x).end()
 using namespace std;
+using ll = long long;
 
 class DisjointSet {
 private:
@@ -93,18 +92,59 @@ ll getSum(vector<ll> &arr) {
     return sum;
 }
 
-void solve() {
-    ll a, b, n;
-    cin >> a >> b >> n;
+int getCnt(string &s, string &t, int n) {
+    int i = 0;
+    int j = 0;
 
-    vector<ll> x = takeInput(n);
-
-    ll timer = b;
-    for (ll i=0; i<n; i++) {
-        timer += min(x[i], a-1);
+    int cnt = 0;
+    while(i < n && j < n) {
+        if (s[i] != t[i]) {
+            i++;
+            j++;
+        } else {
+            cnt++;
+            j++;
+        }
     }
 
-    cout << timer << endl;
+    return cnt;
+}
+
+void solve() {
+    string s; cin >> s;
+
+    int n = s.size();
+
+    if (n == 1) {
+        cout << 1 << endl;
+        return;
+    }
+
+    int zeros = 0;
+    for (int i=0; i<n; i++) if (s[i] == '0') zeros++;
+    int swaps = min(zeros, n-zeros);
+
+    string t = "";
+    for (int i=0; i<n; i++) {
+        if (s[i] == '1' && swaps > 0) {
+            t += '0';
+            swaps--;
+        } else if (s[i] == '1' && !swaps) {
+            t += '1';
+        } else if (s[i] == '0') t += '0';
+    }
+
+    swaps = min(zeros, n-zeros);
+    for (int i=0; i<n; i++) {
+        if (s[i] == '0' && swaps > 0) {
+            t[i] = '1';
+            swaps--;
+        }
+    }
+
+    int cnt = getCnt(s, t, n);
+
+    cout << cnt << endl;
 }
 
 int main() {

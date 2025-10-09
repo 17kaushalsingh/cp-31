@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
-#define ll long long
-#define all(x) (x).begin(), (x).end()
 using namespace std;
+using ll = long long;
 
 class DisjointSet {
 private:
@@ -94,17 +93,16 @@ ll getSum(vector<ll> &arr) {
 }
 
 void solve() {
-    ll a, b, n;
-    cin >> a >> b >> n;
+    unsigned long long n; cin >> n;
 
-    vector<ll> x = takeInput(n);
 
-    ll timer = b;
-    for (ll i=0; i<n; i++) {
-        timer += min(x[i], a-1);
+    // 1 to r-l+1 ==> 
+    ll i =1;
+    while(n % i == 0) {
+        i++;
     }
 
-    cout << timer << endl;
+    cout << i-1 << endl;
 }
 
 int main() {

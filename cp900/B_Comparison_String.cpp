@@ -94,17 +94,18 @@ ll getSum(vector<ll> &arr) {
 }
 
 void solve() {
-    ll a, b, n;
-    cin >> a >> b >> n;
+    ll n; cin >> n;
+    string s; cin >> s;
 
-    vector<ll> x = takeInput(n);
-
-    ll timer = b;
-    for (ll i=0; i<n; i++) {
-        timer += min(x[i], a-1);
+    ll maxSize = 1;
+    ll len = 1;
+    for (ll i=1; i<n; i++) {
+        if (s[i] == s[i-1]) len++;
+        else len = 1;
+        maxSize = max(maxSize, len);
     }
 
-    cout << timer << endl;
+    cout << maxSize + 1 << endl;
 }
 
 int main() {

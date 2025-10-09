@@ -94,17 +94,26 @@ ll getSum(vector<ll> &arr) {
 }
 
 void solve() {
-    ll a, b, n;
-    cin >> a >> b >> n;
+    ll n, q; cin >> n >> q;
+    vector<ll> a = takeInput(n);
 
-    vector<ll> x = takeInput(n);
+    vector<ll> prefixSum(n, 0);
+    prefixSum[0] = a[0];
+    for (ll i=1; i<n; i++) prefixSum[i] = prefixSum[i-1] + a[i];
+    ll totalSum = prefixSum[n-1];
 
-    ll timer = b;
-    for (ll i=0; i<n; i++) {
-        timer += min(x[i], a-1);
+    while(q--) {
+        ll l, r, k; cin >> l >> r >> k;
+
+        l--; r--; // 0 based indexing
+
+        ll sum = totalSum;
+        sum -= prefixSum[r] - ((l-1) >= 0 ? prefixSum[l-1] : 0);
+        sum += (r-l+1) * k;
+
+        string ans = (sum % 2 == 1) ? "YES" : "NO";
+        cout << ans << endl;
     }
-
-    cout << timer << endl;
 }
 
 int main() {
