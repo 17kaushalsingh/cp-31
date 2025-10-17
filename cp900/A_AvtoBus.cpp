@@ -16,28 +16,16 @@ void printArray(vector<int> &arr) {
 
 void solve() {
     int n; cin >> n;
-    vector<int> a = takeInput(n);
 
-    int ops = 2*n;
-    for (int i=0; i<n-1; i++) {
-        if (ops <= 0) break;
-
-        if (a[i] == 1) {
-            a[i]++;
-            ops--;
-        }
+    if (n&1 || n<4) {
+        cout << -1 << endl;
+        return;
     }
 
-    for (int i=1; i<n; i++) {
-        if (ops <= 0) break;
+    int mini = (n/6) + (((n%6)!=0) ? 1 : 0);
+    int maxi = (n/4);
 
-        if (a[i] % a[i-1] == 0) {
-            a[i]++;
-            ops--;
-        }
-    }
-
-    printArray(a);
+    cout << mini << " " << maxi << endl;    
 }
 
 #undef int

@@ -4,7 +4,7 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 
 vector<int> takeInput(int n) {
-    vector<int> arr(n);
+    vector<int> arr(n, 0);
     for (int i=0; i<n; i++) cin >> arr[i];
     return arr;
 }
@@ -18,26 +18,28 @@ void solve() {
     int n; cin >> n;
     vector<int> a = takeInput(n);
 
-    int ops = 2*n;
+    if (n == 1) {
+        cout << 0 << endl;
+        return;
+    }
+
+    // rotate entire array
+    int ans = a[n-1] - a[0];
     for (int i=0; i<n-1; i++) {
-        if (ops <= 0) break;
-
-        if (a[i] == 1) {
-            a[i]++;
-            ops--;
-        }
+        ans = max(ans, a[i] - a[i+1]);
     }
 
-    for (int i=1; i<n; i++) {
-        if (ops <= 0) break;
+    // do not touch a[0]
+    int m = a[1];
+    for (int i=1; i<n; i++) m = max(m, a[i]);
+    ans = max(ans, m - a[0]);
 
-        if (a[i] % a[i-1] == 0) {
-            a[i]++;
-            ops--;
-        }
-    }
+    // do not touch a[n-1]
+    m = a[0];
+    for (int i=0; i<n-1; i++) m = min(m, a[i]);
+    ans = max(ans, a[n-1] - m);
 
-    printArray(a);
+    cout << ans << endl;
 }
 
 #undef int

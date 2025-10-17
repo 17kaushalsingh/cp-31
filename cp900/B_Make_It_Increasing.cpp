@@ -18,26 +18,25 @@ void solve() {
     int n; cin >> n;
     vector<int> a = takeInput(n);
 
-    int ops = 2*n;
-    for (int i=0; i<n-1; i++) {
-        if (ops <= 0) break;
+    if (n == 1) {
+        cout << 0 << endl;
+        return;
+    }
 
-        if (a[i] == 1) {
-            a[i]++;
-            ops--;
+    int cnt = 0;
+    for (int i=n-2; i>=0; i--) {
+        if (a[i+1] == 0) {
+            cout << -1 << endl;
+            return;
+        }
+
+        while(a[i] >= a[i+1]) {
+            cnt++;
+            a[i] = a[i] >> 1;
         }
     }
 
-    for (int i=1; i<n; i++) {
-        if (ops <= 0) break;
-
-        if (a[i] % a[i-1] == 0) {
-            a[i]++;
-            ops--;
-        }
-    }
-
-    printArray(a);
+    cout << cnt << endl;
 }
 
 #undef int
