@@ -33,7 +33,13 @@ int getSum(vector<int> &arr) {
 }
 
 void solve() {
-    
+    int n; cin >> n;
+    vector<int> a = takeInput(n);
+    int maxi = getMax(a);
+    int mini = getMin(a);
+    int sum = getSum(a);
+
+    cout << "mini: " << mini << " maxi: " << maxi << " sum: " << sum << endl;
 }
 
 #undef int
