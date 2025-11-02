@@ -15,26 +15,16 @@ void printArray(vector<int> &arr) {
 }
 
 void solve() {
-    int n; cin >> n;
-    
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
+    string s;
+    cin >> s;
+
+    int n = s.size();
+
+    if (s[0] != s[n-1]) {
+        s[n-1] = s[0];
     }
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
-    }
-
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
-        return;
-    }
-
-    int ops = (b - a) + b;
-    cout << ops << endl;
+    cout << s << endl;
 }
 
 #undef int

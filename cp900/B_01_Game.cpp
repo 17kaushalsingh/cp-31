@@ -14,27 +14,27 @@ void printArray(vector<int> &arr) {
     cout << "\n";
 }
 
+bool f(string &s, int n) {
+    int cnt = 0;
+    int c0 = 0, c1 = 0;
+    for (int i=0; i<n; i++) {
+        if (s[i] == '0') c0++;
+        else c1++;
+    }
+    cnt = min(c0, c1);
+
+    if (cnt&1) return true;
+    return false;
+}
+
 void solve() {
-    int n; cin >> n;
-    
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
-    }
+    string s; cin >> s;
+    int n = s.size();
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
-    }
-
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
-        return;
-    }
-
-    int ops = (b - a) + b;
-    cout << ops << endl;
+    bool ans = f(s, n);
+    if (ans) cout << "DA";
+    else cout << "NET";
+    cout << endl;
 }
 
 #undef int

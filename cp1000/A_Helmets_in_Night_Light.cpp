@@ -14,27 +14,32 @@ void printArray(vector<int> &arr) {
     cout << "\n";
 }
 
+static bool comp(const pair<int, int> &p1, const pair<int, int> &p2) {
+    if (p1.second != p2.second) {
+        return p1.second < p2.second;
+    } else {
+        return p1.first > p2.first;
+    }
+}
+
 void solve() {
     int n; cin >> n;
+    int p; cin >> p;
+    vector<int> a = takeInput(n);
+    vector<int> b = takeInput(n);
+
+    vector<pair<int, int>> pairs(n);
+    for (int i=0; i<n; i++) {
+        pair<int, int> pr = make_pair(a[i], b[i]);
+        pairs[i] = pr;
+    }
+
+    sort(all(pairs));
     
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
-    }
+    int cost = 0;
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
-    }
+    cout << cost << endl;
 
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
-        return;
-    }
-
-    int ops = (b - a) + b;
-    cout << ops << endl;
 }
 
 #undef int

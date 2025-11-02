@@ -14,27 +14,29 @@ void printArray(vector<int> &arr) {
     cout << "\n";
 }
 
+int getSum(int n) {
+    if (n % 4 == 0) {
+        return 0;
+    } else if (n % 4 == 1) {
+        return n;
+    } else if (n % 4 == 2) {
+        return -1;
+    } else {
+        return -(n+1);
+    }
+}
+
 void solve() {
+    int x; cin >> x;
     int n; cin >> n;
-    
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
-    }
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
-    }
+    int d = getSum(n);
 
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
-        return;
+    if (x % 2 == 0) {
+        cout << x - d << endl;
+    } else {
+        cout << x + d << endl;
     }
-
-    int ops = (b - a) + b;
-    cout << ops << endl;
 }
 
 #undef int

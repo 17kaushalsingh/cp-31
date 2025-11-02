@@ -16,24 +16,27 @@ void printArray(vector<int> &arr) {
 
 void solve() {
     int n; cin >> n;
-    
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
+    vector<int> a = takeInput(n);
+
+    unordered_map<int, int> freq;
+    int maxFreq = 0;
+    for (int &x : a) {
+        freq[x]++;
+        maxFreq = max(maxFreq, freq[x]);
     }
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
+    int rem = n - maxFreq;
+
+    int ops = 0;
+    while(rem != 0) {
+        ops += 1; // for copy
+        int op = min(maxFreq, rem); // for swapping
+        ops += op;
+
+        maxFreq += op;
+        rem = n - maxFreq;
     }
 
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
-        return;
-    }
-
-    int ops = (b - a) + b;
     cout << ops << endl;
 }
 

@@ -14,36 +14,29 @@ void printArray(vector<int> &arr) {
     cout << "\n";
 }
 
-int getLastOcc(char ch, string &s) {
+void solve() {
+    string s, target;
+    cin >> s >> target;
+
+    vector<int> freq(26, 0);
+    for (char ch : target) freq[ch-'A']++;
+
     int n = s.size();
     for (int i=n-1; i>=0; i--) {
-        if (s[i] == ch) return i;
+        char ch = s[i];
+        if (freq[ch-'A'] > 0) {
+            freq[ch-'A']--;
+        } else {
+            s[i] = '.';
+        }
     }
 
-    return -1;
-}
+    string rem = "";
+    for (char ch : s) if (ch != '.') rem += ch;
 
-bool f(string &s, string &target) {
-    if (target == s) return true;
-
-    int last = -1;
-    for (char ch : target) {
-        int lastOcc = getLastOcc(ch, s);
-        if (lastOcc > last) {
-            last = lastOcc;
-        } else return false;
-    }
-
-    return true;
-}
-
-void solve() {
-    string s, t;
-    cin >> s >> t;
-    bool ans = f(s, t);
-
-    (ans) ? (cout << "YES") : (cout << "NO");
-    cout << endl;
+    if (rem == target) {
+        cout << "YES" << endl;
+    } else cout << "NO" << endl;
 }
 
 #undef int

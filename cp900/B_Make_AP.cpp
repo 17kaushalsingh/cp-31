@@ -15,26 +15,22 @@ void printArray(vector<int> &arr) {
 }
 
 void solve() {
-    int n; cin >> n;
-    
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
-    }
+    int a, b, c;
+    cin >> a >> b >> c;
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
-    }
-
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
+    if (((2*b-c) % a == 0) && ((2*b-c) / a) > 0) {
+        cout << "YES" << endl;
         return;
+    } else if (((c+a)%(2*b) == 0) && ((c+a)/(2*b)) > 0) {
+        cout << "YES" << endl;
+        return;
+    } else if (((2*b-a)%c == 0) && ((2*b-a)/c) > 0) {
+        cout << "YES" << endl;
+        return;
+    } else {
+        cout << "NO" << endl;
+        return;   
     }
-
-    int ops = (b - a) + b;
-    cout << ops << endl;
 }
 
 #undef int

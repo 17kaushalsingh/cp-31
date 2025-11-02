@@ -15,26 +15,22 @@ void printArray(vector<int> &arr) {
 }
 
 void solve() {
-    int n; cin >> n;
-    
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
-    }
+    int a, b;
+    cin >> a >> b;
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
-    }
-
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
+    if (a == b) {
+        cout << 0 << " " << 0 << endl;
         return;
     }
 
-    int ops = (b - a) + b;
-    cout << ops << endl;
+    if (b > a) swap(a, b);
+
+    int g = a - b;
+    int op1 = b % g;
+    int op2 = g - (b % g);
+    int minOps = min(op1, op2);
+
+    cout << g << " " << minOps << endl;
 }
 
 #undef int

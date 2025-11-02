@@ -16,25 +16,19 @@ void printArray(vector<int> &arr) {
 
 void solve() {
     int n; cin >> n;
-    
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
+    vector<int> a = takeInput(n);
+
+    double ans = INT_MIN;
+    for (int i=0; i<n; i++) {
+        int sum = 0;
+        for (int j=i; j<n; j++) {
+            sum += a[i];
+            double avg = (double)sum / (double)(j-i+1);
+            ans = max(ans, avg);
+        }
     }
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
-    }
-
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
-        return;
-    }
-
-    int ops = (b - a) + b;
-    cout << ops << endl;
+    cout << ans << endl;
 }
 
 #undef int

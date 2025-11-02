@@ -15,26 +15,18 @@ void printArray(vector<int> &arr) {
 }
 
 void solve() {
-    int n; cin >> n;
-    
-    int a = 0, b = 0;
-    while(n > 0 && n % 2 == 0) {
-        n /= 2;
-        a++;
-    }
+    int n, x; cin >> n >> x;
+    vector<int> a = takeInput(n);
 
-    while(n > 0 && n % 3 == 0) {
-        n /= 3;
-        b++;
+    int maxi = 0;
+    int sum = 0;
+    for (int i=0; i<n; i++) {
+        maxi += a[i] / x + ((a[i] % x != 0) ? 1 : 0);
+        sum += a[i];
     }
+    int mini = sum / x + ((sum % x != 0) ? 1 : 0);
 
-    if (n > 1 || a > b) {
-        cout << -1 << endl;
-        return;
-    }
-
-    int ops = (b - a) + b;
-    cout << ops << endl;
+    cout << mini << " " << maxi << endl;
 }
 
 #undef int
